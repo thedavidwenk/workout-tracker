@@ -12,7 +12,7 @@ devise :database_authenticatable, :registerable,
 before_validation -> { self.email = email.to_s.strip.downcase }
 
 # Validations
-validates :email, presence: true, uniqueness: { case_sensitive: false }
+validates :email, presence: true, uniqueness: true
 # Devise’s :validatable already enforces password presence/length; don’t add your own uniqueness check.
 
 # Names (allow Unicode letters, spaces, apostrophes, hyphens)
