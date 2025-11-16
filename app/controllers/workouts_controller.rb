@@ -7,10 +7,35 @@ class WorkoutsController < ApplicationController
   end
 
   def show
-     @workout # is alredy loaded as set workout 
+    # @workout already loaded
   end
 
+  # GET /workout_plans/:workout_plan_id/workouts/new
+  def new
+    @plan = current_user.workout_plans.find(params[:workout_plan_id])
+    @workout = current_user.workouts.new(
+      workout_plan: @plan,
+      workout_date: Date.today
+    )
+  end
+
+  # POST /workout_plans/:workout_plan_id/workouts
   def create
+    plan = current_user.workout_plans.find(params[:workout_plan_id])
+
+    @workout = current_user.workouts.create!(
+      workout_plan: plan,
+      workout_date: Date.today
+    )
+
+    plan.plan_exercises.order(:position).each do |pe|
+      @workout.workout_exercises.create!(
+        exercise: pe.exercise,
+        position: pe.position
+      )
+    end
+
+    redirect_to @workout, notice: "Workout started."
   end
 
   def destroy
@@ -21,6 +46,10 @@ class WorkoutsController < ApplicationController
   private
 
   def set_workout
-  @workout = current_user.workouts.find(params[:id])
+    @workout = current_user.workouts.find(params[:id])
+  end
+
+  def workout_params
+    params.require(:workout).permit(:workout_date, :workout_plan_id)
   end
 end
