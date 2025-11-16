@@ -1,4 +1,6 @@
 class WorkoutPlan < ApplicationRecord
-  belongs_to :user, inverse_of: :workout_plans
-  has_many :plan_exercises, inverse_of: :workout_plans
+  belongs_to :user
+  has_many :plan_exercises,
+           dependent: :destroy
+  has_many :exercises, through: :plan_exercises
 end

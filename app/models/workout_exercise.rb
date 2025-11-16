@@ -1,10 +1,9 @@
 class WorkoutExercise < ApplicationRecord
-  belongs_to :workout, inverse_of: :workout_exercise
+  belongs_to :workout
   belongs_to :exercise
 
   has_many :workout_sets,
-           dependent: :destroy,
-           inverse_of: :workout_exercise
+           dependent: :destroy
 
   validates :position,
           presence: true,

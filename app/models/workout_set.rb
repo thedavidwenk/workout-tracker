@@ -1,7 +1,6 @@
 class WorkoutSet < ApplicationRecord
-  belongs_to :workout_exercise, inverse_of: :workout_sets
-
-  validates :set_index,
+  belongs_to :workout_exercise
+  validates :set_number,
             presence: true,
             numericality: { only_integer: true, greater_than: 0 }
 
