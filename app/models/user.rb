@@ -14,10 +14,12 @@ before_validation -> { self.email = email.to_s.strip.downcase }
 # Names (allow Unicode letters, spaces, apostrophes, hyphens)
 NAME_REGEX = /\A[\p{L}\p{M}\s'’-]+\z/u
 
-validates :first_name, presence: true,
+=begin
+validates :first_name, presence: false,
                         length: { minimum: 2, maximum: 30 },
                         format: { with: NAME_REGEX, message: "only letters, spaces, apostrophes, and hyphens" }
-validates :last_name,  presence: true,
+validates :last_name,  presence: false,
                         length: { minimum: 2, maximum: 40 },
                         format: { with: NAME_REGEX, message: "only letters, spaces, apostrophes, and hyphens" }
+=end
 end

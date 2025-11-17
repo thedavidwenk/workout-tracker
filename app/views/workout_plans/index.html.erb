@@ -1,0 +1,13 @@
+<div>
+  <h1 class="font-bold text-4xl">My Workout Plans</h1>
+  <p>all your workout plans</p>
+  <div class="mt-4">
+    <% @workout_plans.each do |plan| %>
+       <h3 class="font-bold"><%= plan.name %></h3>
+       <% plan.exercises.each do |exercise| %>
+        <h3><%= exercise.name %></h3>
+       <% end %>
+    <% end %>
+  </div>
+</div>
+
