@@ -1,7 +1,13 @@
 <div>
   <h1 class="font-bold text-4xl">My Workout Plans</h1>
   <p>all your workout plans</p>
-  <div class="mt-4">
+  
+  <div class="mt-6">
+    <%= link_to "Create New Workout Plan →",
+        new_workout_plan_path(@workout_plan)
+    %>
+  </div>
+  <div class="mt-5">
     <% @workout_plans.each do |plan| %>
        <h3 class="font-bold"><%= plan.name %></h3>
        <% plan.exercises.each do |exercise| %>
@@ -9,5 +15,6 @@
        <% end %>
     <% end %>
   </div>
+
 </div>
 

@@ -10,6 +10,7 @@ class WorkoutPlansController < ApplicationController
   end
 
   def new
+    @workout_plan = current_user.workout_plans.new
   end
 
   def create
