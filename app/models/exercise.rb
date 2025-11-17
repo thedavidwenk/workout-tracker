@@ -7,6 +7,6 @@ class Exercise < ApplicationRecord
 
   validates :name, presence: true, uniqueness: { case_sensitive: false }
 
-  # Hard block any attempt to destroy, even if no references exist
-  before_destroy { throw :abort }
+  # users can't delete an exercise
+  before_destroy :prevent_delete
 end

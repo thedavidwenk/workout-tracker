@@ -8,6 +8,7 @@
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
 
+=begin
 puts "Creating a test environment..."
 
 
@@ -42,3 +43,28 @@ we_1.workout_sets.create!(set_number: 2, reps: 4, weight_kg: 80)
 
 # start tracking pushups
 we_2.workout_sets.create!(set_number: 1, reps: 8, weight_kg: 60)
+=end
+
+puts "Seeding exercises..."
+
+EXERCISES = [
+  "Bench Press",
+  "Dips",
+  "Push-Up",
+  "Squat",
+  "Deadlift",
+  "Lunges",
+  "Pull-Up",
+  "Barbell Row",
+  "Shoulder Press",
+  "Bicep Curl",
+  "Situps",
+  "Calf Raise",
+  "Push Press"
+]
+
+EXERCISES.each do |name|
+  Exercise.find_or_create_by!(name: name)
+end
+
+puts "Done."
