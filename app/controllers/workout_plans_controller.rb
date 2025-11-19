@@ -6,7 +6,7 @@ class WorkoutPlansController < ApplicationController
   end
 
   def show
-    # @workout_plan already loaded
+    # already set_workout_plan
   end
 
   def new
@@ -27,7 +27,7 @@ class WorkoutPlansController < ApplicationController
   private
 
   def set_workout_plan
-    @workout_plan = current_user.workout_plan.find(params[:id])
+    @workout_plan = current_user.workout_plans.find(params[:id])
   end
 
   def workout_plan_params
