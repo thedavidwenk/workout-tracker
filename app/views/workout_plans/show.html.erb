@@ -1,6 +1,7 @@
 <div>
+  <%= link_to "<- Back to Overview", workout_plans_path(@workout_plans) %>
   <h1 class="font-bold text-4xl"><%= @workout_plan.name %></h1>
-  <div>
+  <div class="mt-6">
     <% if @workout_plan.comment? %>
       <p><%= @workout_plan.comment %></p> 
     <% else %>

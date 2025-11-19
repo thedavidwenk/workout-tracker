@@ -14,6 +14,9 @@ class WorkoutPlansController < ApplicationController
   end
 
   def create
+    @workout_plan = current_user.workout_plans.new(workout_plan_params)
+    @workout_plan.save
+    redirect_to workout_plan_path(@workout_plan)
   end
 
   def edit
@@ -31,6 +34,6 @@ class WorkoutPlansController < ApplicationController
   end
 
   def workout_plan_params
-    params.require(:workout_plan).permit(:workout_date, :workout_plan_id)
+    params.require(:workout_plan).permit(:name, :comment)
   end
 end

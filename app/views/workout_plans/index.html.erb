@@ -9,17 +9,16 @@
           new_workout_plan_path()
       %>
     </div>
-
   </div>
-  
-  <div class="mt-5">
+  <div>
     <% @workout_plans.each do |plan| %>
-       <h3 class="font-bold"><%= plan.name %></h3>
-       <% plan.exercises.each do |exercise| %>
-        <h3><%= exercise.name %></h3>
-       <% end %>
-      <%= link_to "Open Plan →", workout_plan_path(plan) %>
+      <div class="mt-5">
+        <h3 class="font-bold"><%= plan.name %></h3>
+          <% plan.exercises.each do |exercise| %>
+            <h3><%= exercise.name %></h3>
+        <% end %>
+        <%= link_to "Open Plan →", workout_plan_path(plan) %>
+      </div>
     <% end %>
   </div>
-
 </div>
