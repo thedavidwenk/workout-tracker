@@ -1,11 +1,21 @@
 <div>
-  <%= link_to "<- Back to Overview", workout_plans_path(@workout_plans) %>
+  <%= link_to "<- Back to Overview", workout_plans_path %>
+
   <h1 class="font-bold text-4xl"><%= @workout_plan.name %></h1>
+
   <div class="mt-6">
+    <h2>Comment</h2>
     <% if @workout_plan.comment? %>
-      <p><%= @workout_plan.comment %></p> 
+      <p><%= @workout_plan.comment %></p>
     <% else %>
       <p>No comment added</p>
     <% end %>
+
+    <div class="mt-4">
+      <h2>Exercises</h2>
+      <% @workout_plan.exercises.each do |exercise| %>
+        <p><%= exercise.name %></p>
+      <% end %>
+    </div>
   </div>
 </div>
