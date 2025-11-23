@@ -1,22 +1,15 @@
 class WorkoutsController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_workout, only: [:show, :destroy]
+  before_action :set_workout, only: [:show, :destroy, :update]
 
   def index
-    @workouts = current_user.workouts.order(workout_date: :desc)
+    @workouts = current_user.workouts
+                            .includes(workout_exercises: [:exercise, :workout_sets])
+                            .order(created_at: :desc)
   end
 
   def show
     # @workout already loaded
-  end
-
-  # GET /workout_plans/:workout_plan_id/workouts/new
-  def new
-    @plan = current_user.workout_plans.find(params[:workout_plan_id])
-    @workout = current_user.workouts.new(
-      workout_plan: @plan,
-      workout_date: Date.today
-    )
   end
 
   # POST /workout_plans/:workout_plan_id/workouts
@@ -51,6 +44,15 @@ class WorkoutsController < ApplicationController
     redirect_to @workout   # go to the tracking screen for this workout
   end
 
+  def update
+    if @workout.update(workout_params)
+      redirect_to @workouts, notice: "Workout finished! Great job."
+    else
+      flash.now[:alert] = "Could not save your changes."
+      render :show, status: :unprocessable_entity
+    end
+  end
+
   def destroy
     @workout.destroy
     redirect_to workouts_path, notice: "Workout deleted."
@@ -63,6 +65,12 @@ class WorkoutsController < ApplicationController
   end
 
   def workout_params
-    params.require(:workout).permit(:workout_date, :workout_plan_id)
+    params.require(:workout).permit(
+      :workout_date,
+      workout_exercises_attributes: [
+        :id,
+        workout_sets_attributes: [:id, :set_number, :reps, :weight_kg, :note]
+      ]
+    )
   end
 end

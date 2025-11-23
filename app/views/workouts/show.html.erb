@@ -1,4 +1,44 @@
 <div>
-  <h1 class="font-bold text-4xl">Workouts#show</h1>
-  <p>Find me in app/views/workouts/show.html.erb</p>
+  <%= link_to "<- Back to My Workouts", workouts_path %>
+
+  <h1 class="font-bold text-3xl mb-2">
+    <%= @workout.workout_plan.name %>
+  </h1>
+  <p class="text-gray-600 mb-4">
+    <%= @workout.workout_date %>
+  </p>
+
+  <%= simple_form_for @workout, url: workout_path(@workout), method: :patch do |f| %>
+    <%= f.error_notification %>
+
+    <% @workout.workout_exercises.includes(:exercise, :workout_sets).order(:position).each do |we| %>
+      <div class="border rounded-lg p-4 mb-4">
+        <h2 class="font-semibold text-xl mb-2">
+          <%= we.exercise.name %>
+        </h2>
+
+        <div class="space-y-2">
+          <%= f.simple_fields_for :workout_exercises, we do |we_fields| %>
+            <%= we_fields.simple_fields_for :workout_sets do |set_fields| %>
+              <div class="grid grid-cols-3 gap-4 items-end">
+                <div>
+                  <%= set_fields.input :set_number, label: "Set", input_html: { readonly: true } %>
+                </div>
+                <div>
+                  <%= set_fields.input :reps, label: "Reps" %>
+                </div>
+                <div>
+                  <%= set_fields.input :weight_kg, label: "Weight (kg)" %>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="mt-6">
+      <%= f.submit "Save Workout", class: "px-4 py-2 bg-blue-600 text-white rounded-lg" %>
+    </div>
+  <% end %>
 </div>
