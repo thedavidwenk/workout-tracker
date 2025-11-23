@@ -1,38 +1,62 @@
 <div>
-  <div class="">
-    <div>
-      <h1 class="font-bold text-4xl">My Workout Plans</h1>
-      <p>all your workout plans</p>
-    </div>
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-3xl font-bold">My Workout Plans</h1>
+    <p class="text-gray-700">All your workout plans</p>
+
     <div class="mt-6">
       <%= link_to "Create New Workout Plan →",
-          new_workout_plan_path()
-      %>
+          new_workout_plan_path,
+          class: "text-blue-600 underline" %>
     </div>
   </div>
-  <div>
+
+  <!-- Cards -->
+  <div class="space-y-4">
     <% @workout_plans.each do |plan| %>
-      <div class="mt-5">
-          <div>
-            <%= button_to workout_plan_path(plan),
-                          method: :delete,
-                          data: { turbo_confirm: "Are you sure?" },
-                          form: { class: "inline-block" } do %>
-              <%= icon "trash", class: "w-4 h-4 inline-block" %>
-            <% end %>
-          </div>
-        <h3 class="font-bold"><%= plan.name %></h3>
-          <% plan.exercises.each do |exercise| %>
-            <h3><%= exercise.name %></h3>
-        <% end %>
-        <%#= link_to "Open Plan →", workout_plan_path(plan) %>
-        <div>
-          <%= button_to "Start Tracking",
-              workout_plan_workouts_path(plan),
-              method: :post,
-              class: "btn-primary" %>
+
+      <div class="relative border rounded-lg p-4 mb-4">
+
+        <!-- Delete icon (top-right) -->
+        <div class="absolute top-4 right-4">
+          <%= button_to workout_plan_path(plan),
+                        method: :delete,
+                        data: { turbo_confirm: "Are you sure?" },
+                        form: { class: "inline-block" } do %>
+            <%= icon "trash", class: "w-5 h-5 text-gray-500 hover:text-red-600" %>
+          <% end %>
         </div>
+
+        <!-- Title (top-left) -->
+        <div class="mb-3 pr-10">
+          <h2 class="font-semibold text-xl"><%= plan.name %></h2>
+
+          <% if plan.comment.present? %>
+            <p class="text-gray-600 text-sm"><%= plan.comment %></p>
+          <% end %>
+        </div>
+
+        <!-- Exercise list -->
+        <div class="mt-2">
+          <% if plan.exercises.any? %>
+            <% plan.plan_exercises.order(:position).each do |pe| %>
+              <p class="font-medium"><%= pe.exercise.name %></p>
+            <% end %>
+          <% else %>
+            <p class="text-gray-500 italic text-sm">No exercises added yet.</p>
+          <% end %>
+        </div>
+
+        <!-- Start Tracking button (bottom-right) -->
+        <div class="flex justify-end mt-4">
+          <%= button_to "Start Tracking",
+                        workout_plan_workouts_path(plan),
+                        method: :post,
+                        class: "text-sm text-blue-600 underline" %>
+        </div>
+
       </div>
-    <% end %>   
+
+    <% end %>
   </div>
 </div>
