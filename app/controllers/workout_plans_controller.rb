@@ -28,7 +28,7 @@ class WorkoutPlansController < ApplicationController
         )
       end
 
-      redirect_to @workout_plan, notice: "Workout plan created."
+      redirect_to @workout_plan, notice: "Workout plan #{@workout_plan.name} created."
     else
       @exercises = Exercise.order(:name)  # needed when re-rendering :new
       render :new, status: :unprocessable_entity

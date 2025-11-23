@@ -13,12 +13,26 @@
   <div>
     <% @workout_plans.each do |plan| %>
       <div class="mt-5">
+          <div>
+            <%= button_to workout_plan_path(plan),
+                          method: :delete,
+                          data: { turbo_confirm: "Are you sure?" },
+                          form: { class: "inline-block" } do %>
+              <%= icon "trash", class: "w-4 h-4 inline-block" %>
+            <% end %>
+          </div>
         <h3 class="font-bold"><%= plan.name %></h3>
           <% plan.exercises.each do |exercise| %>
             <h3><%= exercise.name %></h3>
         <% end %>
-        <%= link_to "Open Plan →", workout_plan_path(plan) %>
+        <%#= link_to "Open Plan →", workout_plan_path(plan) %>
+        <div>
+          <%= button_to "Start Tracking",
+              workout_plan_workouts_path(plan),
+              method: :post,
+              class: "btn-primary" %>
+        </div>
       </div>
-    <% end %>
+    <% end %>   
   </div>
 </div>
