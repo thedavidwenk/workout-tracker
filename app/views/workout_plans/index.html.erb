@@ -1,9 +1,11 @@
 <div>
   <!-- Header -->
   <div class="mb-6">
-    <h1 class="text-3xl font-bold">My Workout Plans</h1>
-    <p class="text-gray-700">All your workout plans</p>
-
+    <% unless current_user.first_name.present?%>
+      <h1 class="text-3xl font-bold">Ready for a workout?</h1>
+    <% else %>
+      <h1 class="text-3xl font-bold">Hi <%= current_user.first_name %>! Ready for a workout?</h1>
+    <% end %>
     <div class="mt-6">
       <%= link_to "Create New Workout Plan →",
           new_workout_plan_path,
