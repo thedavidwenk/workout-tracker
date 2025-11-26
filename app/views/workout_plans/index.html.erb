@@ -1,17 +1,27 @@
 <div>
   <!-- Header -->
   <div class="mb-6">
-    <% unless current_user.first_name.present?%>
-      <h1 class="text-3xl font-bold">Ready for a workout?</h1>
-    <% else %>
-      <h1 class="text-3xl font-bold">Hi <%= current_user.first_name %>! Ready for a workout?</h1>
-    <% end %>
-    <div class="mt-6">
-      <%= link_to "Create New Workout Plan →",
+    <div class="mb-1 text-gray-600">
+      <%= pluralize(@workout_plans.count, "Workout Plan") %>
+    </div>
+    <div class="flex justify-between items-center">
+      <% if current_user.first_name.present? %>
+        <h1 class="text-3xl font-bold">Hi <%= current_user.first_name %>! Ready for a workout?</h1>
+      <% else %>
+        <h1 class="text-3xl font-bold">Ready for a workout?</h1>
+      <% end %>
+
+      <%= button_to "Create New Workout Plan →",
           new_workout_plan_path,
-          class: "text-blue-600 underline" %>
+          method: :get,
+          class: "px-4 py-2 text-base font-medium leading-6 text-white
+                  whitespace-no-wrap bg-blue-600 border border-blue-700 
+                  rounded-md shadow-sm hover:bg-blue-700 focus:outline-none 
+                  focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer" %>
     </div>
   </div>
+
+
 
   <!-- Cards -->
   <div class="space-y-4">
