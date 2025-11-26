@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="mobile-web-app-capable" content="yes">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1" type="module"></script>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -24,11 +25,17 @@
   </head>
 
   <body>
-    <main class="container mx-auto mt-28 px-5 flex flex-col">
-      <% flash.each do |key, message| %>
-        <div class="flash <%= key %>"><%= message %></div>
-      <% end %>
-      <%= yield %>
+    <main>
+      <%= render "shared/navbar"%>
+      <div class="container mx-auto mt-28 px-4 flex flex-col">
+        <div>
+          <%# Flash messages %>
+          <% flash.each do |key, message| %>
+            <div class="flash <%= key %>"><%= message %></div>
+          <% end %>
+        </div>
+        <%= yield %>
+      </div>
     </main>
   </body>
 </html>
