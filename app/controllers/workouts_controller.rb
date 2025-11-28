@@ -12,6 +12,16 @@ class WorkoutsController < ApplicationController
     # @workout already loaded
   end
 
+  def new
+    plan = current_user.workout_plans.find(params[:workout_plan_id])
+
+    # 1) Create the workout for this user + plan + today
+    @workout = current_user.workouts.new(
+      workout_plan: plan,
+      workout_date: Date.today
+    )
+  end
+
   # POST /workout_plans/:workout_plan_id/workouts
   def create
     plan = current_user.workout_plans.find(params[:workout_plan_id])

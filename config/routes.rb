@@ -3,11 +3,11 @@ Rails.application.routes.draw do
 
   # Workout Plans Tab
   resources :workout_plans do
-    resources :workouts, only: [ :create ]
+    resources :workouts, only: [ :create, :new ]
   end
 
   # My Workout Tab - List of all Workouts.
-  resources :workouts, only: [ :index, :show, :update, :destroy ]
+  resources :workouts, only: [ :index, :show, :update, :destroy, :new ]
 
   root "workout_plans#index"
 end
