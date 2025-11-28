@@ -1,5 +1,17 @@
 <div>
-  <%= link_to "<- Back to My Workouts", workouts_path %>
+      <%= link_to "Back", workouts_path, class: "
+      inline-flex items-center gap-2
+      px-4 py-2
+      text-sm font-medium
+      text-gray-700
+      bg-white
+      border border-gray-300
+      rounded-md
+      hover:bg-gray-50
+      active:bg-gray-100
+      transition
+    " %>
+  <div class="mt-6 mb-8">
 
   <h1 class="font-bold text-3xl mb-2">
     <%= @workout.workout_plan.name %>
