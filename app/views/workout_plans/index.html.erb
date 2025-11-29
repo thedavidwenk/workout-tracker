@@ -60,14 +60,11 @@
         </div>
 
         <!-- Start Tracking button (bottom-right) -->
-        <div class="flex justify-end mt-4">
-          <%= button_to "Start Tracking",
-                        workout_plan_workouts_path(plan),
-                        method: :post,
-                        class: "text-sm text-blue-600 underline" %>
-        </div>
+          <%= link_to "Start Tracking",
+                  new_workout_plan_workout_path(plan),
+                  class: "text-sm text-blue-600 underline" %>
 
-      </div>
+          </div>
 
     <% end %>
   </div>
