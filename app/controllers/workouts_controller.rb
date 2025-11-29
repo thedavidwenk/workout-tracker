@@ -20,43 +20,45 @@ class WorkoutsController < ApplicationController
       workout_plan: plan,
       workout_date: Date.today
     )
-  end
-
-  # POST /workout_plans/:workout_plan_id/workouts
-  def create
-    plan = current_user.workout_plans.find(params[:workout_plan_id])
-
-    # 1) Create the workout for this user + plan + today
-    @workout = current_user.workouts.create!(
-      workout_plan: plan,
-      workout_date: Date.today
-    )
-
+    
     # 2) For each exercise in the plan…
     plan.plan_exercises.order(:position).each do |pe|
       # …create a WorkoutExercise row for this workout
-      we = @workout.workout_exercises.create!(
+      we = @workout.workout_exercises.new(
         exercise: pe.exercise,
         position: pe.position
       )
 
       # 3) For this workout_exercise, create 3 empty sets
       3.times do |i|
-        we.workout_sets.create!(
-          set_number: i + 1,
-          reps: nil,       # user will fill these in later
-          weight_kg: nil,  # same here
-          note: nil
-        )
+          we.workout_sets.build(set_number: i + 1)
       end
     end
+  end
 
-    redirect_to @workout   # go to the tracking screen for this workout
+  # POST /workout_plans/:workout_plan_id/workouts
+  def create
+    plan = current_user.workout_plans.find(params[:workout_plan_id])
+
+    @workout = current_user.workouts.new(
+      workout_plan: plan,
+      workout_date: Date.today
+    )
+
+    # Apply nested attributes from the form (sets etc.)
+    @workout.assign_attributes(workout_params)
+
+    if @workout.save
+      redirect_to @workout, notice: "Workout finished! Great job."
+    else
+      flash.now[:alert] = "Could not finish workout."
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def update
     if @workout.update(workout_params)
-      redirect_to @workouts, notice: "Workout finished! Great job."
+      redirect_to @workout, notice: "Workout updated!"
     else
       flash.now[:alert] = "Could not save your changes."
       render :show, status: :unprocessable_entity
@@ -76,10 +78,9 @@ class WorkoutsController < ApplicationController
 
   def workout_params
     params.require(:workout).permit(
-      :workout_date,
       workout_exercises_attributes: [
-        :id,
-        workout_sets_attributes: [:id, :set_number, :reps, :weight_kg, :note]
+        :id, :exercise_id, :position,
+        workout_sets_attributes: [ :id, :set_number, :reps, :weight_kg ]
       ]
     )
   end
