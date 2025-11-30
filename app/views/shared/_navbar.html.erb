@@ -7,7 +7,7 @@
       <div class="relative flex h-16 items-center justify-between">
         <div class="absolute inset-y-0 left-0 flex items-center sm:hidden">
           <!-- Mobile menu button-->
-          <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/5 hover:text-grey focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
+          <button type="button" command="--toggle" commandfor="mobile-menu" class="relative inline-flex items-center justify-center rounded-md p-2 text-gray-400 hover:bg-white/3 hover:text-grey focus:outline-2 focus:-outline-offset-1 focus:outline-indigo-500">
             <span class="absolute -inset-0.5"></span>                         
             <span class="sr-only">Open main menu</span>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" data-slot="icon" aria-hidden="true" class="size-6 in-aria-expanded:hidden">
@@ -40,15 +40,15 @@
 
           <!-- Profile dropdown -->
           <el-dropdown class="relative ml-3">
-            <button class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500">
+            <button class="relative flex rounded-full focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-500 cursor-pointer">
               <span class="absolute -inset-1.5"></span>
               <span class="sr-only">Open user menu</span>
               <% if current_user.first_name.present? && current_user.last_name.present? %>
-                <span class="inline-flex items-center justify-center size-8 rounded-full bg-gray-500 text-xs font-semibold text-white">
+                <span class="inline-flex items-center justify-center size-8 rounded-full bg-gray-500 text-xs font-semibold text-white cursor-pointer">
                   <%= "#{current_user.first_name.first}#{current_user.last_name.first}".upcase %>
                 </span>
               <% else %>
-                <span class="inline-block size-8 bg-gray-300 rounded-full overflow-hidden">
+                <span class="inline-block size-8 bg-gray-300 rounded-full overflow-hidden cursor-pointer">
                   <svg class="size-full text-gray-300" width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="0.62854" y="0.359985" width="15" height="15" rx="7.5" fill="white"></rect>
                     <path d="M8.12421 7.20374C9.21151 7.20374 10.093 6.32229 10.093 5.23499C10.093 4.14767 9.21151 3.26624 8.12421 3.26624C7.0369 3.26624 6.15546 4.14767 6.15546 5.23499C6.15546 6.32229 7.0369 7.20374 8.12421 7.20374Z" fill="currentColor"></path>
@@ -62,7 +62,7 @@
               <%= button_to "Sign out",
                 destroy_user_session_path,
                 method: :delete,
-                class: "block w-full text-left px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden" %>
+                class: "block w-full text-left px-4 py-2 text-sm text-gray-700 focus:bg-gray-100 focus:outline-hidden cursor-pointer" %>
             </el-menu>
           </el-dropdown>
         </div>

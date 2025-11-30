@@ -16,7 +16,12 @@
 
       <!-- Title + Date (top-left) -->
       <div class="mb-2 pr-10"> 
-        <h2 class="font-semibold text-xl"> <%= l workout.workout_date, format: :long %>: <%= workout.workout_plan.name %></h2>
+        <h2 class="font-semibold text-xl">
+          <%= workout.workout_plan.name %>
+        </h2>
+        <p class="text-gray-600">
+          <%= l workout.workout_date, format: :long %>
+        </p>
       </div>
 
 

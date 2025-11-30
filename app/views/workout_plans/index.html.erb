@@ -35,7 +35,7 @@
                         method: :delete,
                         data: { turbo_confirm: "Are you sure?" },
                         form: { class: "inline-block" } do %>
-            <%= icon "trash", class: "w-5 h-5 text-gray-500 hover:text-red-600" %>
+            <%= icon "trash", class: "w-5 h-5 text-gray-500 hover:text-red-600 cursor-pointer" %>
           <% end %>
         </div>
 
@@ -60,10 +60,14 @@
         </div>
 
         <!-- Start Tracking button (bottom-right) -->
-          <%= link_to "Start Tracking",
-                  new_workout_plan_workout_path(plan),
-                  class: "text-sm text-blue-600 underline" %>
-
+        <div class="flex justify-end">
+          <%= link_to new_workout_plan_workout_path(plan),
+                      class: "flex items-center gap-2 text-sm text-blue-600 " do %>
+            Start Tracking
+            <%= icon "play", class: "w-4 h-4 text-blue-600" %>
+          <% end %>
+        </div>
+  
           </div>
 
     <% end %>

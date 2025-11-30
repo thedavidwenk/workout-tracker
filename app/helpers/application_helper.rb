@@ -4,7 +4,7 @@ module ApplicationHelper
 
     if current_page?(path)
       # Active state from your example
-      "#{base} bg-gray-800 text-white"
+      "#{base} bg-gray-300 text-black void:hover"
     else
       # Inactive but still styled appropriately
       "#{base} text-gray-300 hover:bg-gray-700 hover:text-white"
