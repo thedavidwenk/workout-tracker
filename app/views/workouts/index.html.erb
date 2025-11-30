@@ -15,30 +15,33 @@
       </div>
 
       <!-- Title + Date (top-left) -->
-      <div class="mb-3 pr-10"> 
-        <h2 class="font-semibold text-xl"><%= workout.workout_plan.name %></h2>
-        <p class="text-gray-600 text-sm"><%= workout.workout_date %></p>
+      <div class="mb-2 pr-10"> 
+        <h2 class="font-semibold text-xl"> <%= l workout.workout_date, format: :long %>: <%= workout.workout_plan.name %></h2>
       </div>
 
-      <!-- Exercises + sets -->
-      <% workout.workout_exercises.order(:position).each do |we| %>
-        <div class="mt-3">
-          <p class="font-medium"><%= we.exercise.name %></p>
 
-          <ul class="text-sm text-gray-700 ml-2">
-            <% we.workout_sets.order(:set_number).each do |set| %>
-              <li>
-                Set <%= set.set_number %>:
-                <% if set.reps.present? || set.weight_kg.present? %>
-                  <%= set.reps || "-" %> reps @ <%= set.weight_kg || "-" %> kg
-                <% else %>
-                  (not logged)
-                <% end %>
-              </li>
-            <% end %>
-          </ul>
-        </div>
-      <% end %>
+      <!-- Exercises + sets -->
+      <div class="flex space-x-8 overflow-x-auto pb-2">
+        <% workout.workout_exercises.order(:position).each do |we| %>
+          <div class="mt-3">
+            <p class="font-medium"><%= we.exercise.name %></p>
+
+            <ul class="text-sm text-gray-700 ml-2">
+              <% we.workout_sets.order(:set_number).each do |set| %>
+                <li>
+                  Set <%= set.set_number %>:
+                  <% if set.reps.present? || set.weight_kg.present? %>
+                    <%= set.reps || "-" %> reps @ <%= set.weight_kg || "-" %> kg
+                  <% else %>
+                    (not logged)
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+      </div>
 
       <!-- Open link (bottom-right) -->
       <div class="flex justify-end mt-4">

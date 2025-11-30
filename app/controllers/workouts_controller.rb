@@ -20,7 +20,7 @@ class WorkoutsController < ApplicationController
       workout_plan: plan,
       workout_date: Date.today
     )
-    
+
     # 2) For each exercise in the plan…
     plan.plan_exercises.order(:position).each do |pe|
       # …create a WorkoutExercise row for this workout
