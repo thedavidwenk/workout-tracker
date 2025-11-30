@@ -2,7 +2,7 @@
   <!-- Header -->
   <div class="mb-6">
     <div class="mb-1 text-gray-600">
-      <%= pluralize(@workout_plans.count, "Workout Plan") %>
+      <%= pluralize(@workout_plans.count, "Workout Plan") %> with <%= pluralize(@workout_plans.sum { |plan| plan.exercises.count }, "Exercise") %>
     </div>
     <div class="flex justify-between items-center">
       <% if current_user.first_name.present? %>

@@ -1,14 +1,14 @@
 class WorkoutPlansController < ApplicationController
   before_action :authenticate_user!
-  before_action :set_workout_plan, only: [ :show, :destroy ]
-  before_action :set_exercises, only: [:new, :create]
+  before_action :set_workout_plan, only: [ :destroy ]
+  before_action :set_exercises, only: [ :new, :create ]
   def index
     @workout_plans = current_user.workout_plans.order(created_at: :desc)
   end
 
-  def show
-    # already set_workout_plan
-  end
+  # def show
+  #   # already set_workout_plan
+  # end
 
   def new
     @workout_plan = current_user.workout_plans.new
@@ -28,7 +28,7 @@ class WorkoutPlansController < ApplicationController
         )
       end
 
-      redirect_to @workout_plan, notice: "Workout plan #{@workout_plan.name} created."
+      redirect_to workout_plans_path, notice: "Workout plan #{@workout_plan.name} created."
     else
       @exercises = Exercise.order(:name)  # needed when re-rendering :new
       render :new, status: :unprocessable_entity

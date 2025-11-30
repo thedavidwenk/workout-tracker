@@ -13,12 +13,17 @@
     " %>
   <div class="mt-6 mb-8">
 
-  <div class="mb-5 pr-10"> 
-    <h2 class="font-semibold text-2xl">
-      <%= @workout.workout_plan.name %>
-    </h2>
+  <div class="mt-6 mb-8">
+   <div class="mb-7">
+    <h1 class="text-4xl font-semibold mb-1">
+      <% if @workout.workout_plan.name.downcase.include?("workout") %>
+        Updating <%= @workout.workout_plan.name %> 
+      <% else %>
+        Updating <%= @workout.workout_plan.name %> workout
+      <% end %>
+    </h1>
     <p class="text-gray-600">
-      <%= l @workout.workout_date, format: :long %>
+     From <%= l @workout.workout_date, format: :long %>
     </p>
   </div>
 

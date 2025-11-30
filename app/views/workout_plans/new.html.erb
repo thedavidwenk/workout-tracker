@@ -17,8 +17,8 @@
   <%= simple_form_for @workout_plan do |f| %>
     <%= f.error_notification %>
     
-    <%= f.input :name %>
-    <%= f.input :comment %>
+    <%= f.input :name, input_html: { class: "!text-black" } %>
+    <%= f.input :comment, input_html: { class: "!text-black" } %>
 
 
 <div class="mb-4">
@@ -53,13 +53,14 @@
     <% end %>
   </div>
 </div>
-
-    <%= f.button :submit, "Create Workout Plann",
+  <div class="mt-6 flex justify-end">
+    <%= f.button :submit, "Create Workout Plan",
       class: "px-4 py-2 text-base font-medium leading-6 text-white
               whitespace-no-wrap bg-blue-600 border border-blue-700 
               rounded-md shadow-sm hover:bg-blue-700 focus:outline-none 
               focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 cursor-pointer"
      %>
+  </div>
   <% end %>
 
 </div>

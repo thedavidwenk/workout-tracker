@@ -1,5 +1,5 @@
 <div class="flex justify-between items-center">
-  <%= link_to "Back", workouts_path, class: "
+  <%= link_to "Back", workout_plans_path, class: "
     inline-flex items-center gap-2
     px-4 py-2
     text-sm font-medium
@@ -16,10 +16,14 @@
 <div class="mt-6 mb-8">
   <div class="mb-4">
     <h1 class="text-4xl font-semibold">
-      Starting workout: <%= @workout.workout_plan.name %>
+      <% if @workout.workout_plan.name.downcase.include?("workout") %>
+        Starting <%= @workout.workout_plan.name %> 
+      <% else %>
+        Starting <%= @workout.workout_plan.name %> workout
+      <% end %>
     </h1>
     <p class="text-gray-600">
-      Date: <%= @workout.workout_date %>
+      <%= l @workout.workout_date, format: :long %>
     </p>
   </div>
 
@@ -67,7 +71,7 @@
       </div>
     <% end %>
 
-    <div class="mt-6">
+    <div class="mt-6 flex justify-end">
       <%= f.submit "Save Workout",
             class: "
               px-6 py-3
@@ -75,7 +79,7 @@
               rounded-lg font-medium
               hover:bg-blue-700
               active:bg-blue-800
-              transition
+              transition cursor-pointer
             " %>
     </div>
 
