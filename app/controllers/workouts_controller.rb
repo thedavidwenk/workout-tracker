@@ -5,7 +5,17 @@ class WorkoutsController < ApplicationController
   def index
     @workouts = current_user.workouts
                             .includes(workout_exercises: [:exercise, :workout_sets])
-                            .order(created_at: :desc)
+                            .order(workout_date: :desc)
+
+    today = Date.today
+
+    # Workouts done THIS MONTH
+    @workouts_this_month = current_user.workouts
+                                      .where(workout_date: today.beginning_of_month..today.end_of_month)
+
+    # Workouts done THIS YEAR
+    @workouts_this_year = current_user.workouts
+                                    .where(workout_date: today.beginning_of_year..today.end_of_year)
   end
 
   def show
