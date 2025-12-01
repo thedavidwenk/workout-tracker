@@ -29,15 +29,40 @@
 
       <div class="relative border rounded-lg p-4 mb-4">
 
-        <!-- Delete icon (top-right) -->
+        <!-- Three dot menu (top-right) -->
         <div class="absolute top-4 right-4">
-          <%= button_to workout_plan_path(plan),
-                        method: :delete,
-                        data: { turbo_confirm: "Are you sure?" },
-                        form: { class: "inline-block" } do %>
-            <%= icon "trash", class: "w-5 h-5 text-gray-500 hover:text-red-600 cursor-pointer" %>
-          <% end %>
+          <el-dropdown>
+            <button class="py-0 px-2 rounded  hover:bg-gray-200">
+              ⋮
+            </button>
+
+            <el-menu anchor="bottom end" popover class="w-30 rounded-md bg-white shadow-lg outline outline-black/5 transition transition-discrete [--anchor-gap:--spacing(2)] data-closed:scale-95 data-closed:transform data-closed:opacity-0 data-enter:duration-100 data-enter:ease-out data-leave:duration-75 data-leave:ease-in">
+
+              <!-- Edit -->
+              <%= link_to edit_workout_plan_path(plan),
+                  class: "flex w-full items-center gap-2 px-4 py-2 text-sm text-gray-700 hover:bg-gray-100" do %>
+
+                <%= icon "edit", class: "w-4 h-4 text-gray-600" %>
+                <span>Edit</span>
+
+              <% end %>
+
+              <!-- Delete -->
+              <%= button_to workout_plan_path(plan),
+                  method: :delete,
+                  data: { turbo_confirm: "Are you sure?" },
+                  class: "flex w-full items-center gap-2 px-4 py-2 text-sm text-red-600 hover:bg-gray-100" do %>
+
+                <%= icon "trash",
+                      class: "w-4 h-4 text-red-600" %>
+                <span>Delete</span>
+
+              <% end %>
+
+            </el-menu>
+          </el-dropdown>
         </div>
+
 
         <!-- Title (top-left) -->
         <div class="mb-3 pr-10">

@@ -21,3 +21,5 @@ class WorkoutPlansControllerTest < ActionDispatch::IntegrationTest
     assert_response :success
   end
 end
+
+
