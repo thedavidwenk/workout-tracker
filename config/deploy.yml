@@ -2,7 +2,7 @@
 service: workout_tracker
 
 # Name of the container image.
-image: thedavidwenk/workout-tracker
+image: davidwenk/workout-tracker
 
 # Deploy to these servers.
 servers:
