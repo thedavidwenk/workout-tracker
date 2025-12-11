@@ -23,6 +23,7 @@ proxy:
 
 # Credentials for your image host.
 registry:
+  server: docker.io
   # Specify the registry server, if you're not using Docker Hub
   # server: registry.digitalocean.com / ghcr.io / ...
   username: davidwenk
