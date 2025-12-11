@@ -37,3 +37,7 @@
 !/app/assets/builds/.keep
 .env*
 .env
+
+# Ignore kamal secrets
+.kamal/
+
