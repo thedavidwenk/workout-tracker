@@ -7,7 +7,7 @@ image: your-user/workout_tracker
 # Deploy to these servers.
 servers:
   web:
-    - 192.168.0.1
+    - 46.224.99.20
   # job:
   #   hosts:
   #     - 192.168.0.1
